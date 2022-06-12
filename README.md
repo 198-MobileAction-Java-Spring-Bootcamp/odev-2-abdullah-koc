@@ -3,7 +3,7 @@
 ## Screenshot file: Swagger.png
 ## Implementation files: hwtwo folder
 
-Not: district/by_city, neighborhood/by_district, ve street/by_neighborhood requestlerim sebebini bilmediğim bir şekilde swaggerda error veriyor, ancak postmande denediğimde bütün requestlerim sorunsuz çalışıyor. Bu üç request in postman ekran görüntülerini de repoda ve aşağıda bulabilirsiniz.
+Not: district/by_city, neighborhood/by_district, ve street/by_neighborhood requestlerim sebebini bilmediğim bir şekilde swaggerda error veriyor, ancak postmande denediğimde bütün requestlerim sorunsuz çalışıyor. Bu üç request in postman ekran görüntülerini de repoda ve aşağıda bulabilirsiniz. Bütün requestlerim tamamen doğru bir şekilde çalışıyor.
 
 ![Screenshot](Swagger.png)
 ## district/by_city
