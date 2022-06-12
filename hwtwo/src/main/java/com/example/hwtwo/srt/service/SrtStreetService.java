@@ -25,16 +25,19 @@ public class SrtStreetService {
         return srtStreetEntityService.findAll();
     }
 
+    //Finding street by id
     public SrtStreet findById(Long id){
         return srtStreetEntityService.findById(id).orElseThrow();
     }
 
+    //Saving a street
     public SrtStreet save(SrtStreetSaveDto srtStreetSaveDto){
         SrtStreet srtStreet = srtStreetMapper.convertToSrtStreet(srtStreetSaveDto);
         srtStreet = srtStreetEntityService.save(srtStreet);
         return srtStreet;
     }
 
+    //Updating street name
     public SrtStreet updateName(SrtStreet srtStreet){
         if(!srtStreetEntityService.existsById(srtStreet.getId())){
             throw new RuntimeException("This street does not exist.");
@@ -42,6 +45,7 @@ public class SrtStreetService {
         return srtStreetEntityService.save(srtStreet);
     }
 
+    //Finding all streets of a neighborhood
     public List<SrtStreet> findByNeighborhood(NbhNeighborhoodFindDto nbhNeighborhoodFindDto){
 
         NbhNeighborhood nbhNeighborhood = nbhNeighborhoodService.findById(nbhNeighborhoodFindDto.getId());

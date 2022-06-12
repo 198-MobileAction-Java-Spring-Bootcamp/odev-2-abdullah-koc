@@ -6,8 +6,6 @@ import com.example.hwtwo.adr.dto.AdrAddressDto;
 import com.example.hwtwo.adr.dto.AdrAddressSaveDto;
 import com.example.hwtwo.adr.entity.AdrAddress;
 import com.example.hwtwo.adr.service.entityservice.AdrAddressEntityService;
-import com.example.hwtwo.srt.entity.SrtStreet;
-import com.example.hwtwo.srt.service.SrtStreetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ import java.util.List;
 public class AdrAddressService {
 
     private final AdrAddressEntityService adrAddressEntityService;
-    private final SrtStreetService srtStreetService;
+    private final AdrAddressSaveMapper adrAddressSaveMapper;
 
     public List<AdrAddressDto> findAll(){
         List<AdrAddress> adrAddressList = adrAddressEntityService.findAll();
@@ -30,16 +28,23 @@ public class AdrAddressService {
         return adrAddressDtoList;
     }
 
+    /*
+     * This method is used to save an address.
+     * @param adrAddressSaveDto is the address that is going to be saved.
+     * @return the address that is saved.
+     */
     public AdrAddressDto save(AdrAddressSaveDto adrAddressSaveDto){
-        SrtStreet srtStreet = srtStreetService.findById(adrAddressSaveDto.getSrtStreetId());
-        AdrAddress adrAddress = new AdrAddress();
+        AdrAddress adrAddress = adrAddressSaveMapper.convertToAdrAddress(adrAddressSaveDto);
         adrAddress.setDoorNumber(adrAddressSaveDto.getDoorNumber());
         adrAddress.setAptNumber(adrAddressSaveDto.getAptNumber());
-        adrAddress.setSrtStreet(srtStreet);
         adrAddressEntityService.save(adrAddress);
         return AdrAddressConverter.convertToAdrAddressDto(adrAddress);
     }
 
+    /*
+     * This method is used to delete an address by its id.
+     * @param id is the id of the address that is going to be deleted.
+     */
     public void deleteAddress(Long id){
         if(!adrAddressEntityService.existsById(id)){
             throw new RuntimeException("Address does not exist with id: " + id);
@@ -47,6 +52,12 @@ public class AdrAddressService {
         adrAddressEntityService.delete(adrAddressEntityService.findByIdWithControl(id));
     }
 
+    /*
+     * This method is used to find an address by its id.
+     * @param id is the id of the address that is going to be found.
+     * @return the address that is found.
+     * @throws RuntimeException if the address is not found.
+     */
     public AdrAddressDto getAddressWithId(Long id){
         if(!adrAddressEntityService.existsById(id)){
             throw new RuntimeException("Address does not exist with id: " + id);

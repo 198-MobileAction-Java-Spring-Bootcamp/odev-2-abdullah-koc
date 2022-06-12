@@ -24,10 +24,12 @@ public class DstDistrictService {
         return dstDistrictEntityService.findAll();
     }
 
+    //Finding a district by its id
     public DstDistrict findById(Long id) {
         return dstDistrictEntityService.findById(id).orElseThrow();
     }
 
+    //Saving a district
     public DstDistrict save(DstDistrictSaveDto dstDistrictSaveDto){
 
         DstDistrict dstDistrict = dstDistrictMapper.convertToDstDistrict(dstDistrictSaveDto);
@@ -35,6 +37,7 @@ public class DstDistrictService {
         return dstDistrict;
     }
 
+    //Finding districts of a city
     public List<DstDistrict> findDistrictsOfCity(CtyCityFindDto ctyCityFindDto){
 
         List<DstDistrict> districts = findAll();

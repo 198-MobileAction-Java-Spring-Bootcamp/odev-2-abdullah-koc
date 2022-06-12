@@ -25,10 +25,12 @@ public class NbhNeighborhoodService {
         return nbhNeighborhoodEntityService.findAll();
     }
 
+    //Finding a neighborhood by its id
     public NbhNeighborhood findById(Long id){
         return nbhNeighborhoodEntityService.findById(id).orElseThrow();
     }
 
+    //Saving a neighborhood
     public NbhNeighborhood save(NbhNeighborhoodSaveDto nbhNeighborhoodSaveDto){
 
         NbhNeighborhood nbhNeighborhood = nbhNeighborhoodMapper.convertToNbhNeighborhood(nbhNeighborhoodSaveDto);
@@ -36,6 +38,7 @@ public class NbhNeighborhoodService {
         return nbhNeighborhood;
     }
 
+    //Updating neighborhood name
     public NbhNeighborhood updateName(NbhNeighborhood nbhNeighborhood){
         if(!nbhNeighborhoodEntityService.existsById(nbhNeighborhood.getId())){
             throw new RuntimeException("This neighborhood does not exist.");
@@ -43,6 +46,7 @@ public class NbhNeighborhoodService {
         return nbhNeighborhoodEntityService.save(nbhNeighborhood);
     }
 
+    //Finding all neighborhoods in a district
     public List<NbhNeighborhood> findbyDistrict(DstDistrictFindDto dstDistrictFindDto){
         if(dstDistrictService.findById(dstDistrictFindDto.getDstDistrictId()) == null){
             throw new RuntimeException("District does not exist.");

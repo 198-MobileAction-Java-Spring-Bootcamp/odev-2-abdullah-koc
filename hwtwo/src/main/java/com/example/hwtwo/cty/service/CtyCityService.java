@@ -23,6 +23,11 @@ public class CtyCityService {
         return ctyCityEntityService.findAll();
     }
 
+    /*
+    * This method is used to save a city
+    * @param ctyCitySaveDto - the city to be saved
+    * @return - the saved city
+    */
     public CtyCity save(CtyCitySaveDto ctyCitySaveDto){
         CtyCity ctyCity = ctyCityMapper.convertToCtyCity(ctyCitySaveDto);
         ctyCityEntityService.save(ctyCity);
@@ -33,6 +38,12 @@ public class CtyCityService {
         return ctyCityEntityService.findById(id).orElseThrow();
     }
 
+    /*
+    * This method is used to find a city by plate number
+    * @param plateNumber - the plate number of the city to be found
+    * @return - the city with the given plate number
+    * @throws RuntimeException - if the city with the given plate number does not exist
+    */
     public CtyCity findByPlate(int plate){
         CtyCity ctyCity = ctyCityEntityService.findByPlate(plate);
         if(ctyCity == null){

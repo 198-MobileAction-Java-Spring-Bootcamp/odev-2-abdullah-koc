@@ -18,8 +18,9 @@ public class CntCountryService {
         return cntCountryEntityService.findAll();
     }
 
-    public CntCountry save(CntCountry cntCountry){
 
+    //This method is used to save a country
+    public CntCountry save(CntCountry cntCountry){
         cntCountryEntityService.save(cntCountry);
         return cntCountry;
     }
@@ -28,6 +29,12 @@ public class CntCountryService {
         return cntCountryEntityService.findById(id).orElseThrow();
     }
 
+    /*
+    * This method is used to find a country using the country code
+    * @param countryCode
+    * @return cntCountry that matches the countryCode
+    * @throws RuntimeException if no country is found with plate
+    */
     public CntCountry findByCountryCode(String countryCode){
         CntCountry cntCountry = cntCountryEntityService.findByCountryCode(countryCode);
 
